@@ -4,6 +4,7 @@ import os
 import json
 import ctypes
 import idakeygen
+import platform
 
 license = idakeygen.license["payload"]["licenses"][0]
 
@@ -13,7 +14,16 @@ obj = {
 }
 obj_str = json.dumps(obj, sort_keys=True, separators=(",", ":"))
 
-lib_ida = ctypes.CDLL("./libida.so")
+lib_name = ""
+os_name = platform.system().lower()
+if os_name == "windows":
+    lib_name = "./ida.dll"
+elif os_name == "linux":
+    lib_name = "./libida.so"
+elif os_name == "darwin":
+    lib_name = "./libida.dylib"
+
+lib_ida = ctypes.CDLL(lib_name)
 
 class QCharVector(ctypes.Structure):
     _fields_ = [
