@@ -66,7 +66,6 @@ vec_obj.alloc = 1
 
 lib_ida.reg_write_strlist(ctypes.pointer(vec_obj), f"Licenses\\{license['product_id']}.{license['edition_id']}".encode())
 
-reg_int_op(b"Use90ShortcutSet", True, 1, None)
 reg_int_op(b"EULA 90", True, 1, None)
 reg_int_op(b"LicensePrevWarnTime", True, 0, None)
 reg_int_op(b"AutoCheckUpdates", True, 0, None)
