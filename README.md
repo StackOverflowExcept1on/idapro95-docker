@@ -54,7 +54,7 @@ docker run \
     --platform linux/amd64 \
     --rm \
     --tty \
-    --volume $(pwd):/files \
+    --volume "$(pwd)":/files \
     stackoverflowexcept1on/idapro:cli \
         -B \
         -P+ \
@@ -74,7 +74,7 @@ docker run \
     --platform linux/amd64 \
     --rm \
     --tty \
-    --volume $(pwd):/files \
+    --volume "$(pwd)":/files \
     --volume /tmp/.X11-unix:/tmp/.X11-unix \
     stackoverflowexcept1on/idapro:x11 \
         /files/cat
