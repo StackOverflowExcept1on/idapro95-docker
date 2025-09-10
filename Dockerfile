@@ -6,10 +6,10 @@ RUN apt update && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/ida-pro-9.2
 COPY . /opt/ida-pro-9.2
-RUN echo "485485dda6faf88c23732105400a2a60279e755b1a032aea52900c1333cf0351 ida-pro_92_x64linux.run" | sha256sum -c && \
+RUN echo "aadd0f8ae972b84f94f2a974834abf1619f3bd933b3b4d8275f9c50008d05ae1 ida-pro_92_x64linux.run" | sha256sum -c && \
     chmod +x ida-pro_92_x64linux.run && \
     mkdir -p /root/.local/share/applications && \
-    ./ida-pro_92_x64linux.run --mode unattended --prefix /opt/ida-pro-9.2 && \
+    ./ida-pro_92_x64linux.run --mode unattended && \
     rm ida-pro_92_x64linux.run && \
     ./idapyswitch --verbose --auto-apply --ignore-python-config && \
     export PYTHONDONTWRITEBYTECODE=1 && \
