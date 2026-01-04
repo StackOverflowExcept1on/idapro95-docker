@@ -1,14 +1,14 @@
-### idapro92-docker
+### idapro93-docker
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/stackoverflowexcept1on/idapro)](https://hub.docker.com/r/stackoverflowexcept1on/idapro)
-[![Docker Image CLI](https://img.shields.io/badge/docker_image_(cli)-1.25GB-blue)](https://hub.docker.com/r/stackoverflowexcept1on/idapro)
-[![Docker Image X11](https://img.shields.io/badge/docker_image_(x11)-1.47GB-blue)](https://hub.docker.com/r/stackoverflowexcept1on/idapro)
+[![Docker Image CLI](https://img.shields.io/badge/docker_image_(cli)-1.16GB-blue)](https://hub.docker.com/r/stackoverflowexcept1on/idapro)
+[![Docker Image X11](https://img.shields.io/badge/docker_image_(x11)-1.37GB-blue)](https://hub.docker.com/r/stackoverflowexcept1on/idapro)
 
-IDA Pro 9.2 Docker Image that can be used both in batch mode (without GUI) and with X11 forwarding. You can run IDA Pro on a Linux server at night and get `database.i64` the next day.
+IDA Pro 9.3 Beta 1 Docker Image that can be used both in batch mode (without GUI) and with X11 forwarding. You can run IDA Pro on a Linux server at night and get `database.i64` the next day.
 
 ### Requirements
 
-- `ida-pro_92_x64linux.run` file, which can be downloaded from release page
+- `ida-pro_93_x64linux.run` file, which can be downloaded from release page
 
 ### Building
 

@@ -1,16 +1,16 @@
-FROM ubuntu:25.10 AS builder
+FROM ubuntu:26.04 AS builder
 RUN apt update && \
     apt install --no-install-recommends --yes \
         python3 \
         libpython3.13 && \
     rm -rf /var/lib/apt/lists/*
-WORKDIR /opt/ida-pro-9.2
-COPY . /opt/ida-pro-9.2
-RUN echo "aadd0f8ae972b84f94f2a974834abf1619f3bd933b3b4d8275f9c50008d05ae1 ida-pro_92_x64linux.run" | sha256sum -c && \
-    chmod +x ida-pro_92_x64linux.run && \
+WORKDIR /opt/ida-pro-9.3
+COPY . /opt/ida-pro-9.3
+RUN echo "6a3122c73b49e60d0979f2d2c23fcdbe0c41b8a8008ab19e76f590d96ffbe1b7 ida-pro_93_x64linux.run" | sha256sum -c && \
+    chmod +x ida-pro_93_x64linux.run && \
     mkdir -p /root/.local/share/applications && \
-    ./ida-pro_92_x64linux.run --mode unattended && \
-    rm ida-pro_92_x64linux.run && \
+    ./ida-pro_93_x64linux.run --mode unattended && \
+    rm ida-pro_93_x64linux.run && \
     ./idapyswitch --verbose --auto-apply --ignore-python-config && \
     export PYTHONDONTWRITEBYTECODE=1 && \
     python3 idakeygen.py && \
@@ -19,7 +19,7 @@ RUN echo "aadd0f8ae972b84f94f2a974834abf1619f3bd933b3b4d8275f9c50008d05ae1 ida-p
     rm idareggen.py && \
     sed -i '37,46d' idc/analysis.idc
 
-FROM ubuntu:25.10
+FROM ubuntu:26.04
 ARG MODE=cli
 ENV MODE=$MODE
 RUN apt update && \
@@ -46,7 +46,7 @@ RUN apt update && \
             libdbus-1-3; \
     fi && \
     rm -rf /var/lib/apt/lists/*
-WORKDIR /opt/ida-pro-9.2
-COPY --from=builder /opt/ida-pro-9.2 /opt/ida-pro-9.2
+WORKDIR /opt/ida-pro-9.3
+COPY --from=builder /opt/ida-pro-9.3 /opt/ida-pro-9.3
 COPY --from=builder /root/.idapro /root/.idapro
-ENTRYPOINT ["/opt/ida-pro-9.2/entrypoint.sh"]
+ENTRYPOINT ["/opt/ida-pro-9.3/entrypoint.sh"]
