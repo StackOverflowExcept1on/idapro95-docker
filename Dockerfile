@@ -6,7 +6,7 @@ RUN apt update && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/ida-pro-9.3
 COPY . /opt/ida-pro-9.3
-RUN echo "6a3122c73b49e60d0979f2d2c23fcdbe0c41b8a8008ab19e76f590d96ffbe1b7 ida-pro_93_x64linux.run" | sha256sum -c && \
+RUN echo "2ed43ae4bb84d74dcae6f0099210dfa8d61bfea4952f5f9a07a9aae16cb70f82 ida-pro_93_x64linux.run" | sha256sum -c && \
     chmod +x ida-pro_93_x64linux.run && \
     mkdir -p /root/.local/share/applications && \
     ./ida-pro_93_x64linux.run --mode unattended && \
