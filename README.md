@@ -25,14 +25,14 @@ esac)
 docker build \
     --build-arg MODE=cli \
     --platform "$PLATFORM" \
-    --tag stackoverflowexcept1on/idapro:cli .
+    --tag stackoverflowexcept1on/idapro:9.3-cli .
 ```
 
 ```bash
 docker build \
     --build-arg MODE=x11 \
     --platform "$PLATFORM" \
-    --tag stackoverflowexcept1on/idapro:x11 .
+    --tag stackoverflowexcept1on/idapro:9.3-x11 .
 ```
 
 ### Installing
@@ -42,13 +42,13 @@ If you don't want to build anything, pre-built docker image is available:
 ```bash
 docker pull \
     --platform "$PLATFORM" \
-    stackoverflowexcept1on/idapro:cli
+    stackoverflowexcept1on/idapro:9.3-cli
 ```
 
 ```bash
 docker pull \
     --platform "$PLATFORM" \
-    stackoverflowexcept1on/idapro:x11
+    stackoverflowexcept1on/idapro:9.3-x11
 ```
 
 ### Running
@@ -64,7 +64,7 @@ docker run \
     --rm \
     --tty \
     --volume "$(pwd)":/files \
-    stackoverflowexcept1on/idapro:cli \
+    stackoverflowexcept1on/idapro:9.3-cli \
         -B \
         -P+ \
         /files/cat
@@ -85,7 +85,7 @@ docker run \
     --tty \
     --volume "$(pwd)":/files \
     --volume /tmp/.X11-unix:/tmp/.X11-unix \
-    stackoverflowexcept1on/idapro:x11 \
+    stackoverflowexcept1on/idapro:9.3-x11 \
         /files/cat
 ls cat.i64
 ```
