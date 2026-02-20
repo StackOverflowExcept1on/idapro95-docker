@@ -6,11 +6,19 @@ RUN apt update && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/ida-pro-9.3
 COPY . /opt/ida-pro-9.3
-RUN echo "2ed43ae4bb84d74dcae6f0099210dfa8d61bfea4952f5f9a07a9aae16cb70f82 ida-pro_93_x64linux.run" | sha256sum -c && \
-    chmod +x ida-pro_93_x64linux.run && \
+RUN IDA_RUN=$(case "$(uname -m)" in \
+        aarch64) echo ida-pro_93_armlinux.run ;; \
+        x86_64) echo ida-pro_93_x64linux.run ;; \
+    esac) && \
+    IDA_CHECKSUM=$(case "$(uname -m)" in \
+        aarch64) echo 7fc0f07c2bfb36d809b4838fade74b50310e9dc6d966ff5ce6ded7da898b1d0b ;; \
+        x86_64) echo 2ed43ae4bb84d74dcae6f0099210dfa8d61bfea4952f5f9a07a9aae16cb70f82 ;; \
+    esac) && \
+    echo "$IDA_CHECKSUM $IDA_RUN" | sha256sum -c && \
+    chmod +x "$IDA_RUN" && \
     mkdir -p /root/.local/share/applications && \
-    ./ida-pro_93_x64linux.run --mode unattended && \
-    rm ida-pro_93_x64linux.run && \
+    "./$IDA_RUN" --mode unattended && \
+    rm "$IDA_RUN" && \
     ./idapyswitch --verbose --auto-apply --ignore-python-config && \
     export PYTHONDONTWRITEBYTECODE=1 && \
     python3 idakeygen.py && \

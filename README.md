@@ -8,21 +8,30 @@ IDA Pro 9.3 Docker Image that can be used both in batch mode (without GUI) and w
 
 ### Requirements
 
-- `ida-pro_93_x64linux.run` file, which can be downloaded from release page
+- `ida-pro_93_armlinux.run` & `ida-pro_93_x64linux.run` files, which can be downloaded from release page
+
+### Platform detection
+
+```bash
+PLATFORM=$(case "$(uname -m)" in
+  aarch64) echo linux/arm64 ;;
+  x86_64) echo linux/amd64 ;;
+esac)
+```
 
 ### Building
 
 ```bash
 docker build \
     --build-arg MODE=cli \
-    --platform linux/amd64 \
+    --platform "$PLATFORM" \
     --tag stackoverflowexcept1on/idapro:cli .
 ```
 
 ```bash
 docker build \
     --build-arg MODE=x11 \
-    --platform linux/amd64 \
+    --platform "$PLATFORM" \
     --tag stackoverflowexcept1on/idapro:x11 .
 ```
 
@@ -32,13 +41,13 @@ If you don't want to build anything, pre-built docker image is available:
 
 ```bash
 docker pull \
-    --platform linux/amd64 \
+    --platform "$PLATFORM" \
     stackoverflowexcept1on/idapro:cli
 ```
 
 ```bash
 docker pull \
-    --platform linux/amd64 \
+    --platform "$PLATFORM" \
     stackoverflowexcept1on/idapro:x11
 ```
 
@@ -51,7 +60,7 @@ docker run \
     --hostname hostname \
     --interactive \
     --name container \
-    --platform linux/amd64 \
+    --platform "$PLATFORM" \
     --rm \
     --tty \
     --volume "$(pwd)":/files \
@@ -71,7 +80,7 @@ docker run \
     --interactive \
     --env DISPLAY=$DISPLAY \
     --name container \
-    --platform linux/amd64 \
+    --platform "$PLATFORM" \
     --rm \
     --tty \
     --volume "$(pwd)":/files \
