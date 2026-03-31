@@ -2,7 +2,7 @@ FROM ubuntu:26.04 AS builder
 RUN apt update && \
     apt install --no-install-recommends --yes \
         python3 \
-        libpython3.13 && \
+        libpython3.14 && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/ida-pro-9.3
 COPY . /opt/ida-pro-9.3
@@ -11,8 +11,8 @@ RUN IDA_RUN=$(case "$(uname -m)" in \
         x86_64) echo ida-pro_93_x64linux.run ;; \
     esac) && \
     IDA_CHECKSUM=$(case "$(uname -m)" in \
-        aarch64) echo 7fc0f07c2bfb36d809b4838fade74b50310e9dc6d966ff5ce6ded7da898b1d0b ;; \
-        x86_64) echo 2ed43ae4bb84d74dcae6f0099210dfa8d61bfea4952f5f9a07a9aae16cb70f82 ;; \
+        aarch64) echo 4ebfe28f114600989cbf1c08e603add8fd1dc33265b51672afeb9f01e144162f ;; \
+        x86_64) echo 095bf5114b7645236a1ee43b65f64aca7da3337ebc6e7f9799077db6f58cd307 ;; \
     esac) && \
     echo "$IDA_CHECKSUM $IDA_RUN" | sha256sum -c && \
     chmod +x "$IDA_RUN" && \
@@ -33,7 +33,7 @@ ENV MODE=$MODE
 RUN apt update && \
     apt install --no-install-recommends --yes \
         python3 \
-        libpython3.13 && \
+        libpython3.14 && \
     if [ "$MODE" = "x11" ]; then \
         apt install --no-install-recommends --yes \
             libgl1 \
