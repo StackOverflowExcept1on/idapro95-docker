@@ -11,8 +11,8 @@ RUN IDA_RUN=$(case "$(uname -m)" in \
         x86_64) echo ida-pro_93_x64linux.run ;; \
     esac) && \
     IDA_CHECKSUM=$(case "$(uname -m)" in \
-        aarch64) echo 4ebfe28f114600989cbf1c08e603add8fd1dc33265b51672afeb9f01e144162f ;; \
-        x86_64) echo 095bf5114b7645236a1ee43b65f64aca7da3337ebc6e7f9799077db6f58cd307 ;; \
+        aarch64) echo 2ca611571c39c2f164b6ac8e6e7500088018b1755dbaf6796e538cb43a4ea10b ;; \
+        x86_64) echo a64e6589feeca0f4e1bfb962d1a283761fb38c5158f5f82c8f1e7ddf32f69850 ;; \
     esac) && \
     echo "$IDA_CHECKSUM $IDA_RUN" | sha256sum -c && \
     chmod +x "$IDA_RUN" && \
@@ -36,11 +36,14 @@ RUN apt update && \
         libpython3.14 && \
     if [ "$MODE" = "x11" ]; then \
         apt install --no-install-recommends --yes \
-            libgl1 \
-            libopengl0 \
+            libdbus-1-3 \
             libegl1 \
-            libglib2.0-0 \
             libfontconfig1 \
+            libgl1 \
+            libglib2.0-0 \
+            libopengl0 \
+            libsecret-1-0 \
+            libsm6 \
             libxcb-cursor0 \
             libxcb-icccm4 \
             libxcb-image0 \
@@ -49,9 +52,7 @@ RUN apt update && \
             libxcb-shape0 \
             libxcb-xinerama0 \
             libxcb-xkb1 \
-            libsm6 \
-            libxkbcommon-x11-0 \
-            libdbus-1-3; \
+            libxkbcommon-x11-0; \
     fi && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/ida-pro-9.3
