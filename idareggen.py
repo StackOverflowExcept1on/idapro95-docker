@@ -6,7 +6,7 @@ import ctypes
 import idakeygen
 import platform
 
-license = idakeygen.license["payload"]["licenses"][0]
+license = idakeygen.create_license("ntkey", "named")["payload"]["licenses"][0]
 
 obj = {
     "licsrc": {"path": os.path.join(os.getcwd(), "idapro.hexlic")},
