@@ -1,14 +1,14 @@
-### idapro94-docker
+### idapro95-docker
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/stackoverflowexcept1on/idapro)](https://hub.docker.com/r/stackoverflowexcept1on/idapro)
-[![Docker Image CLI](https://img.shields.io/badge/docker_image_(9.4_cli)-~1.77GB-blue)](https://hub.docker.com/r/stackoverflowexcept1on/idapro)
-[![Docker Image X11](https://img.shields.io/badge/docker_image_(9.4_x11)-~1.98GB-blue)](https://hub.docker.com/r/stackoverflowexcept1on/idapro)
+[![Docker Image CLI](https://img.shields.io/badge/docker_image_(9.5_cli)-~1.77GB-blue)](https://hub.docker.com/r/stackoverflowexcept1on/idapro)
+[![Docker Image X11](https://img.shields.io/badge/docker_image_(9.5_x11)-~1.98GB-blue)](https://hub.docker.com/r/stackoverflowexcept1on/idapro)
 
-IDA Pro 9.4 SP 1 Docker Image that can be used both in batch mode (without GUI) and with X11 forwarding. You can run IDA Pro on a Linux server at night and get `database.i64` the next day.
+IDA Pro 9.5 Beta 1 Docker Image that can be used both in batch mode (without GUI) and with X11 forwarding. You can run IDA Pro on a Linux server at night and get `database.i64` the next day.
 
 ### Requirements
 
-- `ida-pro_94_armlinux.run` & `ida-pro_94_x64linux.run` files, which can be downloaded from release page
+- `ida-pro_95_armlinux.run` & `ida-pro_95_x64linux.run` files, which can be downloaded from release page
 
 ### Platform detection
 
@@ -25,14 +25,14 @@ esac)
 docker build \
     --build-arg MODE=cli \
     --platform "$PLATFORM" \
-    --tag stackoverflowexcept1on/idapro:9.4-cli .
+    --tag stackoverflowexcept1on/idapro:9.5-cli .
 ```
 
 ```bash
 docker build \
     --build-arg MODE=x11 \
     --platform "$PLATFORM" \
-    --tag stackoverflowexcept1on/idapro:9.4-x11 .
+    --tag stackoverflowexcept1on/idapro:9.5-x11 .
 ```
 
 ### Installing
@@ -42,13 +42,13 @@ If you don't want to build anything, pre-built docker image is available:
 ```bash
 docker pull \
     --platform "$PLATFORM" \
-    stackoverflowexcept1on/idapro:9.4-cli
+    stackoverflowexcept1on/idapro:9.5-cli
 ```
 
 ```bash
 docker pull \
     --platform "$PLATFORM" \
-    stackoverflowexcept1on/idapro:9.4-x11
+    stackoverflowexcept1on/idapro:9.5-x11
 ```
 
 ### Running
@@ -64,7 +64,7 @@ docker run \
     --rm \
     --tty \
     --volume "$(pwd)":/files \
-    stackoverflowexcept1on/idapro:9.4-cli \
+    stackoverflowexcept1on/idapro:9.5-cli \
         -B \
         -P+ \
         /files/cat
@@ -85,7 +85,7 @@ docker run \
     --tty \
     --volume "$(pwd)":/files \
     --volume /tmp/.X11-unix:/tmp/.X11-unix \
-    stackoverflowexcept1on/idapro:9.4-x11 \
+    stackoverflowexcept1on/idapro:9.5-x11 \
         /files/cat
 ls cat.i64
 ```

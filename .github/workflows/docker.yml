@@ -7,7 +7,7 @@ on:
 
 jobs:
   docker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     strategy:
       matrix:
         mode: [ cli, x11 ]
@@ -15,6 +15,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
+
+      - name: Free up disk space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          large-packages: true
 
       - name: Login to Docker Hub
         uses: docker/login-action@v4
@@ -32,11 +37,11 @@ jobs:
 
       - name: Download binaries
         run: |
-          curl -sL -o ida-pro_94_armlinux.run "${{ secrets.IDA_PRO_ARM_LINUX_URL }}"
-          curl -sL -o ida-pro_94_x64linux.run "${{ secrets.IDA_PRO_X64_LINUX_URL }}"
+          curl -sL -o ida-pro_95_armlinux.run "${{ secrets.IDA_PRO_ARM_LINUX_URL }}"
+          curl -sL -o ida-pro_95_x64linux.run "${{ secrets.IDA_PRO_X64_LINUX_URL }}"
 
-          sha256sum ida-pro_94_armlinux.run
-          sha256sum ida-pro_94_x64linux.run
+          sha256sum ida-pro_95_armlinux.run
+          sha256sum ida-pro_95_x64linux.run
 
       - name: Build and push
         uses: docker/build-push-action@v7
@@ -45,4 +50,4 @@ jobs:
           context: .
           platforms: linux/arm64,linux/amd64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:9.4-${{ matrix.mode }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:9.5-${{ matrix.mode }}

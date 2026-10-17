@@ -1,18 +1,18 @@
-FROM ubuntu:26.04 AS builder
+FROM ubuntu:26.10 AS builder
 RUN apt update && \
     apt install --no-install-recommends --yes \
         python3 \
         libpython3.14 && \
     rm -rf /var/lib/apt/lists/*
-WORKDIR /opt/ida-pro-9.4
-COPY . /opt/ida-pro-9.4
+WORKDIR /opt/ida-pro-9.5
+COPY . /opt/ida-pro-9.5
 RUN IDA_RUN=$(case "$(uname -m)" in \
-        aarch64) echo ida-pro_94_armlinux.run ;; \
-        x86_64) echo ida-pro_94_x64linux.run ;; \
+        aarch64) echo ida-pro_95_armlinux.run ;; \
+        x86_64) echo ida-pro_95_x64linux.run ;; \
     esac) && \
     IDA_CHECKSUM=$(case "$(uname -m)" in \
-        aarch64) echo 21973c0197a9ad92aeb0223e489acc1ab964047c5d553df0bdd3d8d5d477318b ;; \
-        x86_64) echo 84ff9d6e773853df00c0a0f438bd66246b2caeadc7489d4e584e9d7c4c628c7c ;; \
+        aarch64) echo 67bcd0df38abd1dd97441ed0b2982455235fb4eac6be6d434c6d774a05017721 ;; \
+        x86_64) echo 3c4337c94fd290b88d95937a0cb38f835278cc8ce7bfe88b6a1f62699e904811 ;; \
     esac) && \
     echo "$IDA_CHECKSUM $IDA_RUN" | sha256sum -c && \
     chmod +x "$IDA_RUN" && \
@@ -29,7 +29,7 @@ RUN IDA_RUN=$(case "$(uname -m)" in \
     rm libida32.so.bak && \
     sed -i '37,46d' idc/analysis.idc
 
-FROM ubuntu:26.04
+FROM ubuntu:26.10
 ARG MODE=cli
 ENV MODE=$MODE
 RUN apt update && \
@@ -43,7 +43,9 @@ RUN apt update && \
             libfontconfig1 \
             libgl1 \
             libglib2.0-0 \
+            libgssapi-krb5-2 \
             libopengl0 \
+            libpcre2-16-0 \
             libsecret-1-0 \
             libsm6 \
             libxcb-cursor0 \
@@ -58,7 +60,7 @@ RUN apt update && \
             libxtst6; \
     fi && \
     rm -rf /var/lib/apt/lists/*
-WORKDIR /opt/ida-pro-9.4
-COPY --from=builder /opt/ida-pro-9.4 /opt/ida-pro-9.4
+WORKDIR /opt/ida-pro-9.5
+COPY --from=builder /opt/ida-pro-9.5 /opt/ida-pro-9.5
 COPY --from=builder /root/.idapro /root/.idapro
-ENTRYPOINT ["/opt/ida-pro-9.4/entrypoint.sh"]
+ENTRYPOINT ["/opt/ida-pro-9.5/entrypoint.sh"]
