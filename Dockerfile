@@ -11,8 +11,8 @@ RUN IDA_RUN=$(case "$(uname -m)" in \
         x86_64) echo ida-pro_95_x64linux.run ;; \
     esac) && \
     IDA_CHECKSUM=$(case "$(uname -m)" in \
-        aarch64) echo 67bcd0df38abd1dd97441ed0b2982455235fb4eac6be6d434c6d774a05017721 ;; \
-        x86_64) echo 3c4337c94fd290b88d95937a0cb38f835278cc8ce7bfe88b6a1f62699e904811 ;; \
+        aarch64) echo 50d73d89faf0509313e823c9385ba8ded5639b8dcc8e2071357ce873e6000709 ;; \
+        x86_64) echo f8bbc7904ab7ab1b864bbaa698374396d52afacd3c39403db6dff2d0cf355075 ;; \
     esac) && \
     echo "$IDA_CHECKSUM $IDA_RUN" | sha256sum -c && \
     chmod +x "$IDA_RUN" && \

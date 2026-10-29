@@ -1,4 +1,4 @@
-# Made specifically for IDA 9.5 beta1
+# Made specifically for IDA 9.5
 # May not work for other versions of this software including future ones
 
 import json
